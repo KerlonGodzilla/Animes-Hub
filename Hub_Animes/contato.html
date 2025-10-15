@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - Animes_HUB</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <h1>Contato</h1>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="tabela.html">Favoritos</a>
+            <a href="index2.html">Lançamentos</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="formulario">
+            <h2>Envie sua Avaliação</h2>
+
+            <form>
+                <div class="campo">
+                    <label for="nome">Nome:</label><br>
+                    <input type="text" id="nome" name="nome" required placeholder="Digite seu nome">
+                </div>
+
+                <div class="campo">
+                    <label for="preferido">Série ou Filme Preferido:</label><br>
+                    <input type="text" id="preferido" name="preferido" placeholder="Ex: One Piece">
+                </div>
+
+                <div class="campo">
+                    <label for="nota">Nota (0 a 10):</label><br>
+                    <input type="number" id="nota" name="nota" min="0" max="10">
+                </div>
+
+                <div class="campo">
+                    <label for="datahora">Data e Hora que assistiu:</label><br>
+                    <input type="datetime-local" id="datahora" name="datahora">
+                </div>
+
+                <div class="campo">
+                    <label for="avaliacao">Avaliação (Satisfação):</label><br>
+                    <input type="range" id="avaliacao" name="avaliacao" min="0" max="10">
+                </div>
+
+                <div class="campo">
+                    <button type="submit">Salvar Avaliação</button>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Animes_HUB</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
