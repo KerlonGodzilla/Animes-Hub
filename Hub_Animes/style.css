@@ -74,35 +74,198 @@ p {
 
 
 /* =====================
-     CABEÇALHO E MENU
-  ===================== */
+   CABEÇALHO GODZILLA MULTICOLORIDO
+===================== */
 
 header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-nav {
-    margin-top: 10px;
-}
-
-nav a {
+    position: relative;
+    padding: 10px 40px;
+  }
+  
+  /* contêiner principal do topo */
+  .topo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+  }
+  
+  /* título */
+  .topo h1 {
+    color: var(--cor-godzilla, #00ffcc);
+    text-shadow: 0 0 15px var(--cor-godzilla, #00ffcc);
+    font-size: 1.8rem;
+    letter-spacing: 1px;
+    margin: 0;
+    transition: color 0.6s, text-shadow 0.6s;
+  }
+  
+  /* menu central */
+  .menu-central {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .menu-central a {
     color: #fff;
-    background: #333;
-    padding: 8px 12px;
-    margin: 0 6px;
+    background: #222;
+    padding: 8px 16px;
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: 6px;
     font-weight: bold;
-    transition: background 0.3s, transform 0.3s;
-}
-
-nav a:hover,
-nav a:focus {
-    background: #555;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+  }
+  
+  .menu-central a:hover {
+    background: var(--cor-godzilla, #00ffcc);
+    transform: scale(1.08);
+    box-shadow: 0 0 15px var(--cor-godzilla, #00ffcc);
+  }
+  
+  /* botão login no canto direito */
+  .user-area {
+    position: absolute;
+    right: 40px;
+    top: 10px;
+  }
+  
+  #btnLoginTopo {
+    background: var(--gradiente-godzilla, linear-gradient(90deg, #00ffcc, #00cc99));
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.6s;
+  }
+  
+  #btnLoginTopo:hover {
     transform: scale(1.05);
-}
+    box-shadow: 0 0 15px var(--cor-godzilla, #00ffcc);
+  }
+  
+  /* responsividade */
+  @media (max-width: 720px) {
+    .topo {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+  
+    .menu-central {
+      position: static;
+      transform: none;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+  
+    .user-area {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+    }
+  }
 
+  /* =====================
+   LOGIN E CADASTRO GODZILLA MULTICOLORIDO
+===================== */
+
+#loginSection, #cadastroSection {
+    max-width: 420px;
+    margin: 60px auto;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    transition: all 0.4s ease;
+    animation: surgir 0.6s ease forwards;
+  }
+  
+  /* Títulos e textos */
+  #loginSection h2, #cadastroSection h2 {
+    text-align: center;
+    color: var(--cor-godzilla, #00ffcc);
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 0 0 15px var(--cor-godzilla, #00ffcc);
+  }
+  
+  #loginSection label, #cadastroSection label {
+    color: #fff;
+    font-weight: bold;
+  }
+  
+  #loginSection input,
+  #cadastroSection input {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    color: #fff;
+    width: 100%;
+    transition: all 0.3s ease;
+  }
+  
+  #loginSection input:focus,
+  #cadastroSection input:focus {
+    border-color: var(--cor-godzilla, #00ffcc);
+    box-shadow: 0 0 10px var(--cor-godzilla, #00ffcc);
+    outline: none;
+  }
+  
+  /* Botões */
+  #loginSection button,
+  #cadastroSection button {
+    width: 100%;
+    background: var(--gradiente-godzilla, linear-gradient(90deg, #00ffcc, #00cc99));
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  #loginSection button:hover,
+  #cadastroSection button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--cor-godzilla, #00ffcc);
+  }
+  
+  /* Links entre login/cadastro */
+  #loginSection a,
+  #cadastroSection a {
+    color: var(--cor-godzilla, #00ffcc);
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+  }
+  
+  #loginSection a:hover,
+  #cadastroSection a:hover {
+    color: #fff;
+    text-shadow: 0 0 10px var(--cor-godzilla, #00ffcc);
+  }
+  
+  /* Animação de entrada */
+  @keyframes surgir {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
 /* =====================
      PÁGINA INICIAL (cards)
@@ -405,4 +568,157 @@ footer {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* =====================
+     LOGIN E CADASTRO (Tema Godzilla)
+===================== */
+
+#loginSection, #cadastroSection {
+    max-width: 420px;
+    margin: 60px auto;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(0, 255, 204, 0.2);
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 255, 204, 0.15);
+    transition: all 0.4s ease;
+    animation: surgir 0.6s ease forwards;
+}
+
+#loginSection:hover, #cadastroSection:hover {
+    box-shadow: 0 6px 25px rgba(0, 255, 204, 0.25);
+    transform: translateY(-3px);
+}
+
+/* Título */
+#loginSection h2, #cadastroSection h2 {
+    text-align: center;
+    color: #00ffcc;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0, 255, 204, 0.6);
+}
+
+/* Campos */
+#loginSection .campo, #cadastroSection .campo {
+    margin-bottom: 15px;
+}
+
+#loginSection label, #cadastroSection label {
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#loginSection input,
+#cadastroSection input {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 8px;
+    padding: 10px;
+    color: #fff;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+#loginSection input:focus,
+#cadastroSection input:focus {
+    border-color: #00ffcc;
+    box-shadow: 0 0 8px rgba(0, 255, 204, 0.5);
+    outline: none;
+}
+
+/* Botões */
+#loginSection button,
+#cadastroSection button {
+    width: 100%;
+    background: linear-gradient(90deg, #00ffcc, #00cc99);
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#loginSection button:hover,
+#cadastroSection button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 255, 204, 0.4);
+}
+
+/* Links para trocar entre Login e Cadastro */
+#loginSection p,
+#cadastroSection p {
+    color: #ddd;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+#loginSection a,
+#cadastroSection a {
+    color: #00ffcc;
+    font-weight: bold;
+    text-decoration: none;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+#loginSection a:hover,
+#cadastroSection a:hover {
+    color: #00ffaa;
+    text-shadow: 0 0 8px rgba(0, 255, 204, 0.6);
+}
+
+/* Efeito de entrada */
+@keyframes surgir {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsividade */
+@media (max-width: 500px) {
+    #loginSection, #cadastroSection {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+/* Descrição escondida por padrão */
+.descricao {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+/* Mostrar descrição */
+.descricao.mostrar {
+    max-height: 500px; /* ajuste conforme necessário */
+    opacity: 1;
+}
+
+/* Botão Godzilla para toggle descrição */
+.btn-godzilla-toggle {
+    background: linear-gradient(90deg, #00ffcc, #00cc99);
+    color: #000;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s, background 0.6s;
+    margin-top: 10px;
+}
+
+.btn-godzilla-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px #00ffcc;
 }

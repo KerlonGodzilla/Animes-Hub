@@ -4,48 +4,66 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Animes_HUB</title>
+    <title>Animes-HUB</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
     <header>
-        <h1>Animes_HUB</h1>
-        <nav>
-            <a href="tabela.html">Favoritos</a>
-            <a href="index2.html">Lançamentos</a>
-            <a href="contato.html">Contato</a>
-        </nav>
+        <div class="topo">
+            <h1>Animes_HUB</h1>
+
+            <nav class="menu-central">
+                <a href="tabela.html">Favoritos</a>
+                <a href="index2.html">Lançamentos</a>
+                <a href="contato.html">Contato</a>
+            </nav>
+
+            <div class="user-area">
+                <button id="btnLoginTopo">🔐 Login / Cadastro</button>
+            </div>
+        </div>
     </header>
 
     <main>
         <section class=" intro ">
-            <p>Bem-vindo! Aqui eu compartilho recomendações de séries e filmes, com resumos e pôsteres.</p>
+            <h3>Bem-vindo a Animes_HUB</h3>
         </section>
 
         <section class="cards ">
             <!-- Card 1 -->
-            <article class="card ">
-                <img src="img/poster1.jpg " alt="Poster do Filme 1 ">
-                <h2>Demon Slayer</h2>
-                <p>Demon Slayer (Kimetsu no Yaiba) é uma franquia japonesa sobre o bondoso jovem Tanjiro Kamado, que se
-                    torna um caçador de demônios após o massacre de sua família e a transformação de sua irmã Nezuko em
-                    um deles. Ele entra para o Demon Slayer
-                    Corps para vingar sua família, encontrar uma cura para Nezuko e derrotar o Rei Demônio, Muzan
-                    Kibutsuji, usando as técnicas de respiração e uma espada forjada com uma lâmina solar. .</p>
-            </article>
+            <div class="card">
+                <article class="card ">
+                    <img src="img/poster1.jpg " alt="Poster do Filme 1 ">
+                    <h2>Demon Slayer</h2>
+                    <p class="descricao">Demon Slayer (Kimetsu no Yaiba) é uma franquia japonesa sobre o bondoso jovem
+                        Tanjiro Kamado, que
+                        se
+                        torna um caçador de demônios após o massacre de sua família e a transformação de sua irmã Nezuko
+                        em
+                        um deles. Ele entra para o Demon Slayer
+                        Corps para vingar sua família, encontrar uma cura para Nezuko e derrotar o Rei Demônio, Muzan
+                        Kibutsuji, usando as técnicas de respiração e uma espada forjada com uma lâmina solar. .</p>
+                    <button class="btn-godzilla-toggle">Mostrar Descrição</button>
+                </article>
+            </div>
 
             <!-- Card 2 -->
-            <article class="card ">
-                <img src="img/poster2.jpg " alt="Poster do Filme 2 ">
-                <h2>Dragon Ball Super</h2>
-                <p>
-                    Dragon Ball Super é a sequência oficial da franquia Dragon Ball, criada por Akira Toriyama e
-                    Toyotaro. A história se passa após a derrota de Majin Boo, durante o intervalo de dez anos antes do
-                    28º Torneio de Artes Marciais. A narrativa expande o universo
-                    da série, explorando novos personagens, transformações e a vastidão de uma cosmologia com deuses e
-                    universos paralelos.</p>
-            </article>
+            <div class="card">
+                <article class="card ">
+                    <img src="img/poster2.jpg " alt="Poster do Filme 2 ">
+                    <h2>Dragon Ball Super</h2>
+                    <p class="descricao">
+                        Dragon Ball Super é a sequência oficial da franquia Dragon Ball, criada por Akira Toriyama e
+                        Toyotaro. A história se passa após a derrota de Majin Boo, durante o intervalo de dez anos antes
+                        do
+                        28º Torneio de Artes Marciais. A narrativa expande o universo
+                        da série, explorando novos personagens, transformações e a vastidão de uma cosmologia com deuses
+                        e
+                        universos paralelos.</p>
+                    <button class="btn-toggle">Mostrar Descrição</button>
+                </article>
+            </div>
 
             <!-- Card 3 -->
             <article class="card ">
@@ -56,6 +74,7 @@
                     do Chapéu de Palha, enquanto buscam
                     este tesouro para que Luffy possa se tornar o próximo Rei dos Piratas. Escrito e ilustrado por
                     Eiichiro Oda, o mangá é um sucesso global de ação, aventura e fantasia. .</p>
+                <button class="btn-toggle">Mostrar Descrição</button>
             </article>
 
             <!-- Card 4 -->
@@ -68,6 +87,7 @@
                     vingança contra os titãs após um ataque devastador à sua cidade. Eles se juntam à Divisão de
                     Reconhecimento, um grupo de elite que luta contra os titãs, enquanto tentam desvendar os mistérios
                     por trás de sua existência e o passado da humanidade.</p>
+                <button class="btn-toggle">Mostrar Descrição</button>
             </article>
 
             <!-- Card 5 -->
@@ -79,6 +99,7 @@
                     a buscar adversários mais fortes. Acompanhado por seu discípulo ciborgue, Genos, Saitama entra na
                     Associação de Heróis para ganhar reconhecimento, mas sua aparência simples e força inquestionável o
                     tornam desrespeitado pelos outros heróis e pelo público, apesar de salvar a todos.</p>
+                <button class="btn-toggle">Mostrar Descrição</button>
             </article>
 
             <!-- Card 6 -->
@@ -90,6 +111,7 @@
                     seus amigos. O protagonista tem um demônio raposa de nove caudas selado dentro de si desde o
                     nascimento, o que o levou a ser rejeitado pela vila, mas também o impulsionou a buscar a admiração e
                     o respeito que nunca teve.</p>
+                <button class="btn-toggle">Mostrar Descrição</button>
             </article>
 
             <!-- Card 7 -->
@@ -102,6 +124,7 @@
                     que o permite subir de nível e fortalecer-se como um jogador de RPG, transformando-o de presa em
                     predador. A história acompanha a jornada dele para se tornar o caçador mais poderoso, descobrindo os
                     segredos dos portais e dominando a classe de necromante.</p>
+                <button class="btn-toggle">Mostrar Descrição</button>
             </article>
 
             <!-- Card 8 -->
@@ -114,6 +137,7 @@
                     "Individualidade" e entra em uma escola de heróis para se tornar profissional. A história acompanha
                     sua jornada, o desenvolvimento dos personagens e a diversidade de poderes em uma sociedade de heróis
                     e vilões, explorando temas como perseverança e superação de sonhos.</p>
+                <button class="btn-toggle">Mostrar Descrição</button>
             </article>
 
             <!-- Card 9 -->
@@ -124,6 +148,7 @@
                     Elizabeth busca os Sete Pecados Capitais, um grupo de cavaleiros exilados. Dez anos após serem
                     acusados de traição e considerados os vilões do reino, eles são chamados para ajudar a princesa a
                     retomar o trono, que foi tomado pelos Cavaleiros Sagrados em um golpe de estado.</p>
+                <button class="btn-toggle">Mostrar Descrição</button>
             </article>
 
             <!-- Card 10 -->
@@ -134,6 +159,7 @@
                     programa radical de treinamento com 300 jovens jogadores. Após a eliminação do Japão na Copa do
                     Mundo, o programa Blue Lock reúne os melhores atacantes do país para uma competição de eliminação,
                     onde apenas um atacante egoísta será selecionado para a seleção japonesa.</p>
+                <button class="btn-toggle">Mostrar Descrição</button>
             </article>
         </section>
     </main>

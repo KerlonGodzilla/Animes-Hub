@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Animes-HUB</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="topo">
+            <h1>Animes_HUB</h1>
+
+            <nav class="menu-central">
+                <a href="index.html">Início</a>
+                <a href="tabela.html">Favoritos</a>
+                <a href="index2.html">Lançamentos</a>
+                <a href="contato.html">Contato</a>
+            </nav>
+
+            <div class="user-area">
+                <button id="btnLoginTopo">🔐 Login / Cadastro</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="formulario" id="loginSection">
+            <h2>Entrar na Conta</h2>
+            <form id="formLogin">
+                <div class="campo">
+                    <label for="usuarioLogin">Usuário:</label>
+                    <input type="text" id="usuarioLogin" required placeholder="Digite o usuário">
+                </div>
+
+                <div class="campo">
+                    <label for="senhaLogin">Senha:</label>
+                    <input type="password" id="senhaLogin" required placeholder="Digite a senha">
+                </div>
+
+                <div class="campo">
+                    <button type="submit">Entrar</button>
+                </div>
+            </form>
+
+            <p style="text-align:center; margin-top:15px;">
+                Ainda não tem conta?
+                <a href="#" id="mostrarCadastro" style="color:#00ffcc;">Cadastre-se</a>
+            </p>
+        </section>
+
+        <!-- Seção de Cadastro -->
+        <section class="formulario" id="cadastroSection" style="display:none;">
+            <h2>Criar Conta</h2>
+            <form id="formCadastro">
+                <div class="campo">
+                    <label for="nomeCadastro">Nome:</label>
+                    <input type="text" id="nomeCadastro" required placeholder="Digite seu nome completo">
+                </div>
+
+                <div class="campo">
+                    <label for="usuarioCadastro">Usuário:</label>
+                    <input type="text" id="usuarioCadastro" required placeholder="Escolha um nome de usuário">
+                </div>
+
+                <div class="campo">
+                    <label for="senhaCadastro">Senha:</label>
+                    <input type="password" id="senhaCadastro" required placeholder="Crie uma senha">
+                </div>
+
+                <div class="campo">
+                    <button type="submit">Cadastrar</button>
+                </div>
+            </form>
+
+            <p style="text-align:center; margin-top:15px;">
+                Já tem conta?
+                <a href="#" id="mostrarLogin" style="color:#00ffcc;">Faça login</a>
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Animes_HUB</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
