@@ -40,6 +40,8 @@ function mostrarMensagem(texto, tipo) {
     setTimeout(() => mensagem.remove(), 3);
 }
 
+// Funcao de cores TEMA GODZILLA
+
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.documentElement;
 
@@ -52,7 +54,6 @@ document.addEventListener("DOMContentLoaded", () => {
         { cor: "#00ffff", gradiente: "linear-gradient(90deg, #00ffff, #ff00ff)" }
     ];
 
-    // Escolhe um tema aleatório
     const temaAleatorio = temasGodzilla[Math.floor(Math.random() * temasGodzilla.length)];
 
     root.style.setProperty("--cor-godzilla", temaAleatorio.cor);
@@ -130,19 +131,28 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================
     const botoesDescricao = document.querySelectorAll(".btn-godzilla-toggle");
 
-    botoesDescricao.forEach(btn => {
-        // aplica estilo Godzilla dinâmico
+    botoesDescricao.forEach((btn) => {
+        // Aplica estilo Godzilla
         btn.style.background = temaAleatorio.gradiente;
         btn.style.border = `1px solid ${temaAleatorio.cor}`;
         btn.style.color = "#000";
         btn.style.transition = "all 0.3s ease";
+
         btn.addEventListener("mouseover", () => btn.style.filter = "brightness(1.2)");
         btn.addEventListener("mouseout", () => btn.style.filter = "brightness(1)");
 
-        btn.addEventListener("click", () => {
-            const descricao = btn.previousElementSibling;
-            descricao.classList.toggle("mostrar");
+        // Inicialmente escondida
+        const card = btn.closest(".card");
+        if (!card) return; // segurança
+        const descricao = card.querySelector(".descricao");
+        if (!descricao) return; // segurança
 
+        descricao.classList.remove("mostrar");
+        btn.textContent = "Mostrar Descrição";
+
+        // Toggle apenas este card
+        btn.addEventListener("click", () => {
+            descricao.classList.toggle("mostrar");
             btn.textContent = descricao.classList.contains("mostrar")
                 ? "Esconder Descrição"
                 : "Mostrar Descrição";
@@ -330,14 +340,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnMostrarCadastro = document.getElementById("mostrarCadastro");
     const btnMostrarLogin = document.getElementById("mostrarLogin");
 
-    // alternar entre login e cadastro \\
-
+    // Alternar entre login e cadastro
     if (btnMostrarCadastro && btnMostrarLogin) {
         btnMostrarCadastro.addEventListener("click", (e) => {
             e.preventDefault();
             secLogin.style.display = "none";
             secCadastro.style.display = "block";
         });
+
         btnMostrarLogin.addEventListener("click", (e) => {
             e.preventDefault();
             secCadastro.style.display = "none";
@@ -345,8 +355,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Cadastro de novo usuário \\
-
+    // Cadastro de novo usuário
     if (formCadastro) {
         formCadastro.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -369,17 +378,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
             usuarios.push({ nome, usuario, senha });
             localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
             alert("✅ Cadastro realizado com sucesso!");
             formCadastro.reset();
 
-            // volta para o login  \\
-
+            // Voltar para login
             secCadastro.style.display = "none";
             secLogin.style.display = "block";
         });
     }
 
-    // Login \\
+    // Login
     if (formLogin) {
         formLogin.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -399,24 +408,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
-
-// Variacões do botão da descrição \\
-
-document.addEventListener("DOMContentLoaded", () => {
-    const btns = document.querySelectorAll(".btn-godzilla-toggle");
-
-    btns.forEach(btn => {
-        const descricao = btn.previousElementSibling; // pega a descrição acima do botão
-
-        btn.addEventListener("click", () => {
-            descricao.classList.toggle("mostrar"); // alterna a visibilidade
-
-            if (descricao.classList.contains("mostrar")) {
-                btn.textContent = "Esconder Descrição";
-            } else {
-                btn.textContent = "Mostrar Descrição";
-            }
-        });
-    });
-});
-

@@ -25,18 +25,23 @@ body {
     /* transicao de backgraud */
     transition: background-color 0.5s, color 0.5s;
 }
+
     /* Tema Godzilla (ativado pelo JS) */
+
 .tema-godzilla {
     background-color: #0a0a0a;
     color: #f5f5f5;
 }
+
 /* Mensagens de formulário */
+
 .mensagem {
     text-align: center;
     font-weight: bold;
     font-size: 18px;
     margin-top: 10px;
 }
+
 .mensagem.sucesso {
     color: #00ff88;
 }
@@ -45,6 +50,7 @@ body {
 }
 
 /* Botões criados dinamicamente */
+
 .botao-tema, .botao-media {
     background-color: #333;
     color: #fff;
@@ -271,37 +277,71 @@ header {
      PÁGINA INICIAL (cards)
   ===================== */
 
-.cards {
-    display: flex;
-    gap: 16px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
-
 .card {
-    background: rgba(255, 255, 255, 0.05);
-    /* leve transparência para tema escuro */
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
-    padding: 12px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 14px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
     width: 300px;
     text-align: center;
+    padding: 16px;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+    animation: surgir 0.6s ease forwards;
+}
+  
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  padding: 40px 10px;
 }
 
 .card:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.7);
-    transform: translateY(-3px);
+  transform: translateY(-6px) scale(1.03);
+  border-color: var(--cor-godzilla, #00ffcc);
+  box-shadow: 0 0 25px var(--cor-godzilla, #00ffcc);
 }
 
 .card img {
-    width: 100%;
-    height: auto;
-    border-radius: 6px;
-    margin-bottom: 8px;
+  width: 100%;
+  height: 380px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  margin-bottom: 12px;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
 }
 
+.card img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px var(--cor-godzilla, #00ffcc);
+}
+
+.card h2 {
+  color: #fff;
+  font-size: 1.3rem;
+  margin: 8px 0;
+  text-shadow: 0 0 5px var(--cor-godzilla, #00ffcc);
+}
+
+.descricao {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  font-size: 0.95rem;
+  color: #ddd;
+  text-align: justify;
+  transition: max-height 0.6s ease, opacity 0.6s ease;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.descricao.mostrar {
+  max-height: 600px;
+  opacity: 1;
+}
 
 /* =====================
      PÁGINA FAVORITOS
@@ -345,7 +385,6 @@ header {
     font-size: 0.95rem;
 }
 
-
 /* Link de retorno (favoritos -> início) */
 
 main a {
@@ -381,9 +420,9 @@ footer {
   ===================== */
 
 @media (max-width: 720px) {
-    .card {
-        width: 100%;
-    }
+  .card {
+    width: 90%;
+  }
 }
 
 @media (max-width: 600px) {
@@ -559,17 +598,16 @@ footer {
 }
 
 /* Efeito de entrada */
-@keyframes aparecer {
+@keyframes surgir {
   from {
     opacity: 0;
-    transform: translateY(15px);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
     transform: translateY(0);
   }
 }
-
 /* =====================
      LOGIN E CADASTRO (Tema Godzilla)
 ===================== */
@@ -650,6 +688,7 @@ footer {
 }
 
 /* Links para trocar entre Login e Cadastro */
+
 #loginSection p,
 #cadastroSection p {
     color: #ddd;
@@ -672,6 +711,7 @@ footer {
 }
 
 /* Efeito de entrada */
+
 @keyframes surgir {
     from {
         opacity: 0;
@@ -684,6 +724,7 @@ footer {
 }
 
 /* Responsividade */
+
 @media (max-width: 500px) {
     #loginSection, #cadastroSection {
         width: 90%;
@@ -692,6 +733,7 @@ footer {
 }
 
 /* Descrição escondida por padrão */
+
 .descricao {
     max-height: 0;
     overflow: hidden;
@@ -699,26 +741,34 @@ footer {
     transition: max-height 0.5s ease, opacity 0.5s ease;
 }
 
+
 /* Mostrar descrição */
-.descricao.mostrar {
-    max-height: 500px; /* ajuste conforme necessário */
-    opacity: 1;
+.descricao.mostrar + .btn-godzilla-toggle {
+  background: var(--gradiente-godzilla, linear-gradient(90deg, #00ffff, #ff00ff));
+  color: #fff;
+  border-color: #fff;
 }
 
 /* Botão Godzilla para toggle descrição */
+
 .btn-godzilla-toggle {
-    background: linear-gradient(90deg, #00ffcc, #00cc99);
-    color: #000;
-    font-weight: bold;
-    border: none;
-    border-radius: 8px;
-    padding: 8px 14px;
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s, background 0.6s;
-    margin-top: 10px;
+  background: var(--gradiente-godzilla, linear-gradient(90deg, #00ffcc, #00cc99));
+  color: #000;
+  font-weight: bold;
+  border: 1px solid var(--cor-godzilla, #00ffcc);
+  border-radius: 10px;
+  padding: 10px 16px;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 90%;
+  box-shadow: 0 0 12px var(--cor-godzilla, #00ffcc);
+  transition: transform 0.3s, box-shadow 0.3s, background 0.4s ease;
 }
 
 .btn-godzilla-toggle:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px #00ffcc;
+  transform: scale(1.07);
+  color: #fff;
+  background: var(--gradiente-godzilla, linear-gradient(90deg, #ff00ff, #00ffff));
+  box-shadow: 0 0 25px var(--cor-godzilla, #00ffcc);
+  border-color: #fff;
 }
