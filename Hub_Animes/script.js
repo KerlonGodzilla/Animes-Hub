@@ -40,7 +40,7 @@ function mostrarMensagem(texto, tipo) {
     setTimeout(() => mensagem.remove(), 3);
 }
 
-// Funcao de cores TEMA GODZILLA
+// Funcao de cores TEMA GODZILLA \\
 
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.documentElement;
@@ -163,54 +163,69 @@ document.addEventListener("DOMContentLoaded", () => {
 // funcao calcular media \\
 
 function calcularMedia() {
-    const notas = document.querySelectorAll("table tbody tr td:last-child");
-    if (notas.length === 0) return;
+    const numberInputs = document.querySelectorAll(
+        ".tabela-favoritos tbody tr td input[type='number']"
+    );
+
+    if (!numberInputs || numberInputs.length === 0) {
+        alert("Nenhuma nota encontrada para calcular a média.");
+        return;
+    }
 
     let soma = 0;
     let count = 0;
 
-    notas.forEach(td => {
-        const valor = parseFloat(td.textContent);
-        if (!isNaN(valor)) {
-            soma += valor;
+    numberInputs.forEach((input) => {
+        const val = parseFloat(input.value);
+        if (!isNaN(val)) {
+            soma += val;
             count++;
         }
     });
 
-    if (count === 0) return;
+    if (count === 0) {
+        alert("Nenhuma nota válida encontrada para calcular a média.");
+        return;
+    }
 
     const media = soma / count;
+    mostrarCardMedia(media);
+}
 
-    // Remove card antigo se existir \\
+// funcao mostrar media \\
+
+function mostrarCardMedia(media) {
     const antigo = document.querySelector(".card-media");
     if (antigo) antigo.remove();
 
-    // Cria o novo card \\
     const card = document.createElement("div");
     card.classList.add("card-media");
     card.innerHTML = `
-      <h3>📊 Média das Notas</h3>
-      <p>A média das séries favoritas é <strong>${media.toFixed(2)}</strong>.</p>
-    `;
+    <h3>📊 Média das Notas</h3>
+    <p>A média das suas notas é <strong>${media.toFixed(2)}</strong>.</p>
+    <button class="botao-fechar-media">✖ Fechar Resultado</button>
+  `;
 
-    // Adiciona no local correto
-    document.getElementById("resultadoMedia").appendChild(card);
+    const container = document.querySelector(".tabela-container") || document.body;
+    container.appendChild(card);
+
+    const btnFechar = card.querySelector(".botao-fechar-media");
+    btnFechar.addEventListener("click", () => {
+        card.classList.add("sumir");
+        setTimeout(() => card.remove(), 400);
+    });
 }
-
 
 // funcao mostrar a data atual \\
 
 function mostrarDataAtual() {
-    const rodape = document.querySelector("footer p");
-    if (!rodape) return;
-
-    function atualizar() {
-        const agora = new Date();
-        rodape.innerHTML = `&copy; 2025 Animes_HUB | ${agora.toLocaleString()}`;
+    const dataAtual = new Date();
+    const dataFormatada = dataAtual.toLocaleDateString("pt-BR");
+    const horaFormatada = dataAtual.toLocaleTimeString("pt-BR");
+    const footer = document.querySelector("footer p");
+    if (footer) {
+        footer.innerHTML = `© 2025 Animes_HUB | ${dataFormatada}, ${horaFormatada}`;
     }
-
-    atualizar();
-    setInterval(atualizar, 1000);
 }
 
 // Liga as funções aos eventos \\
@@ -218,17 +233,18 @@ function mostrarDataAtual() {
 document.addEventListener("DOMContentLoaded", () => {
     mostrarDataAtual();
 
-    const form = document.querySelector("form");
-    if (form) form.addEventListener("submit", validarFormulario);
+    const tabela = document.querySelector(".tabela-favoritos");
+    const container = document.querySelector(".tabela-container");
 
-    const tabela = document.querySelector("table");
-    if (tabela) {
+    if (tabela && container) {
         const botaoMedia = document.createElement("button");
-        botaoMedia.textContent = " Calcular Média";
+        botaoMedia.textContent = "📊 Calcular Média";
         botaoMedia.classList.add("botao-media");
         botaoMedia.onclick = calcularMedia;
-        tabela.parentElement.appendChild(botaoMedia);
+        container.appendChild(botaoMedia);
     }
+
+    if (tabela) carregarTabela();
 });
 
 // Função: Salvar dados do formulário (contato.html) — AGORA POR CONTA DO USUÁRIO \\
@@ -247,14 +263,14 @@ function salvarFormulario(event) {
     const preferido = document.getElementById("preferido").value.trim();
     const nota = document.getElementById("nota").value.trim();
     const datahora = document.getElementById("datahora").value;
-    const avaliacao = document.getElementById("avaliacao").value;
+    const comentario = document.getElementById("comentario").value.trim();
 
     if (!nome || !preferido || !nota) {
         alert("⚠️ Preencha todos os campos obrigatórios!");
         return;
     }
 
-    const novaEntrada = { nome, preferido, nota, datahora, avaliacao };
+    const novaEntrada = { nome, preferido, nota, datahora, comentario };
 
     // cria uma chave única para cada usuário logado \\
     const chaveUsuario = `avaliacoes_${usuarioLogado.usuario}`;
@@ -274,33 +290,160 @@ function carregarTabela() {
     const tbody = document.querySelector("tbody");
     if (!tbody) return;
 
-    tbody.innerHTML = ""; // limpa antes de preencher \\
+    tbody.innerHTML = "";
 
     if (!usuarioLogado) {
         const msg = document.createElement("tr");
-        msg.innerHTML = `<td colspan="4">⚠️ Faça login para ver suas avaliações.</td>`;
+        msg.innerHTML = `<td colspan="5">⚠️ Faça login para ver suas avaliações.</td>`;
         tbody.appendChild(msg);
         return;
     }
 
-    // busca apenas os dados da conta logada \\
     const chaveUsuario = `avaliacoes_${usuarioLogado.usuario}`;
     const dadosSalvos = JSON.parse(localStorage.getItem(chaveUsuario)) || [];
 
     if (dadosSalvos.length > 0) {
-        dadosSalvos.forEach(item => {
+        dadosSalvos.forEach((item) => {
             const linha = document.createElement("tr");
+
+            const dataFormatada = item.datahora
+                ? new Date(item.datahora).toLocaleString("pt-BR", {
+                    dateStyle: "short",
+                    timeStyle: "short",
+                })
+                : "—";
+
             linha.innerHTML = `
-                <td>${item.preferido}</td>
-                <td>${item.datahora ? new Date(item.datahora).getFullYear() : "-"}</td>
-                <td>Avaliação: ${item.avaliacao}</td>
-                <td>${item.nota}</td>
-            `;
+        <td><input type="text" value="${item.preferido}" class="input-editar" disabled></td>
+        <td><input type="datetime-local" value="${item.datahora || ""}" class="input-editar" disabled></td>
+        <td class="celula-comentario">
+          <div class="comentario-container">
+            <p class="comentario-texto" style="display:none;">${item.comentario ? item.comentario.replace(/\n/g, '<br>') : "Sem comentário"}</p>
+            <textarea class="input-editar comentario-edit" rows="3" disabled style="display:none;">${item.comentario || ""}</textarea>
+            <button class="btn-toggle-comentario">Mostrar Comentário</button>
+          </div>
+        </td>
+        <td><input type="number" min="0" max="10" value="${item.nota}" class="input-editar" disabled></td>
+        <td>
+          <button class="botao-editar">✏️ Editar</button>
+          <button class="botao-salvar" style="display:none;">💾 Salvar</button>
+          <button class="botao-cancelar" style="display:none;">🛑 Cancelar</button>
+        </td>
+      `;
+
             tbody.appendChild(linha);
+
+            const btnEditar = linha.querySelector(".botao-editar");
+            const btnSalvar = linha.querySelector(".botao-salvar");
+            const btnCancelar = linha.querySelector(".botao-cancelar");
+            const btnToggle = linha.querySelector(".btn-toggle-comentario");
+
+            const pComentario = linha.querySelector(".comentario-texto");
+            const taComentario = linha.querySelector(".comentario-edit");
+            const inputs = linha.querySelectorAll(".input-editar");
+
+            // === Mostrar/Esconder Comentário (igual à página inicial) ===
+            btnToggle.addEventListener("click", () => {
+                if (pComentario.style.display === "none" || pComentario.style.display === "") {
+                    pComentario.style.display = "block";
+                    btnToggle.textContent = "Esconder Comentário";
+                } else {
+                    pComentario.style.display = "none";
+                    btnToggle.textContent = "Mostrar Comentário";
+                }
+            });
+
+            // === Editar/Salvar/Cancelar ===
+            btnEditar.addEventListener("click", () => {
+                // salva valores originais e estado de exibição
+                linha.dataset.original = JSON.stringify({
+                    preferido: inputs[0].value,
+                    datahora: inputs[1].value,
+                    comentario: taComentario.value,
+                    nota: inputs[3].value,
+                    visivel: pComentario.style.display === "block" // salva estado
+                });
+
+                pComentario.style.display = "none";
+                taComentario.style.display = "block";
+                taComentario.disabled = false;
+
+                // Oculta botão Mostrar/Esconder enquanto edita
+                btnToggle.style.display = "none";
+
+                inputs.forEach((i) => (i.disabled = false));
+                btnEditar.style.display = "none";
+                btnSalvar.style.display = "inline-block";
+                btnCancelar.style.display = "inline-block";
+            });
+
+            btnSalvar.addEventListener("click", () => {
+                const original = JSON.parse(linha.dataset.original || "{}");
+                const estavaVisivel = original.visivel || false;
+
+                item.preferido = inputs[0].value.trim();
+                item.datahora = inputs[1].value;
+                item.comentario = taComentario.value.trim();
+                item.nota = inputs[3].value.trim();
+
+                pComentario.innerHTML = item.comentario
+                    ? item.comentario.replace(/\n/g, "<br>")
+                    : "Sem comentário";
+
+                taComentario.disabled = true;
+                taComentario.style.display = "none";
+
+                // 🔥 restaura estado anterior (mostrado ou escondido)
+                pComentario.style.display = estavaVisivel ? "block" : "none";
+                btnToggle.textContent = estavaVisivel ? "Esconder Comentário" : "Mostrar Comentário";
+
+                // Mostra novamente o botão Mostrar/Esconder
+                btnToggle.style.display = "inline-block";
+
+                inputs.forEach((i) => (i.disabled = true));
+
+                localStorage.setItem(chaveUsuario, JSON.stringify(dadosSalvos));
+
+                btnSalvar.style.display = "none";
+                btnCancelar.style.display = "none";
+                btnEditar.style.display = "inline-block";
+
+                alert("✅ Avaliação atualizada com sucesso!");
+            });
+
+            btnCancelar.addEventListener("click", () => {
+                const original = JSON.parse(linha.dataset.original || "{}");
+                if (original) {
+                    inputs[0].value = original.preferido || "";
+                    inputs[1].value = original.datahora || "";
+                    taComentario.value = original.comentario || "";
+                    inputs[3].value = original.nota || "";
+                    pComentario.innerHTML = taComentario.value
+                        ? taComentario.value.replace(/\n/g, "<br>")
+                        : "Sem comentário";
+                }
+
+                taComentario.disabled = true;
+                taComentario.style.display = "none";
+
+                // 🔥 restaura também o estado anterior (mostrado/escondido)
+                const estavaVisivel = original.visivel || false;
+                pComentario.style.display = estavaVisivel ? "block" : "none";
+                btnToggle.textContent = estavaVisivel ? "Esconder Comentário" : "Mostrar Comentário";
+
+                // Mostra novamente o botão Mostrar/Esconder
+                btnToggle.style.display = "inline-block";
+
+                inputs.forEach((i) => (i.disabled = true));
+
+                btnSalvar.style.display = "none";
+                btnCancelar.style.display = "none";
+                btnEditar.style.display = "inline-block";
+            });
         });
     } else {
         const msg = document.createElement("tr");
-        msg.innerHTML = `<td colspan="4">📭 Nenhuma série cadastrada ainda. Vá até a página de Contato e envie sua avaliação!</td>`;
+        msg.innerHTML = `<td colspan="5">📭 Nenhuma série cadastrada ainda.</td>`;
         tbody.appendChild(msg);
     }
 }
