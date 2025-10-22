@@ -697,6 +697,7 @@ footer {
 /* ======== Botões ======== */
 
 .botao-editar,
+.botao-apagar,
 .botao-salvar,
 .botao-cancelar,
 .btn-toggle-comentario {
@@ -787,6 +788,7 @@ footer {
 }
 
 .botao-editar:hover,
+.botao-apagar:hover,
 .botao-salvar:hover,
 .botao-cancelar:hover,
 .btn-toggle-comentario:hover,

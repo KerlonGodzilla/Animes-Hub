@@ -342,7 +342,7 @@ function carregarTabela() {
             const taComentario = linha.querySelector(".comentario-edit");
             const inputs = linha.querySelectorAll(".input-editar");
 
-            // === Mostrar/Esconder Comentário (igual à página inicial) ===
+            // === Mostrar/Esconder Comentário (igual à página inicial) === \\
             btnToggle.addEventListener("click", () => {
                 if (pComentario.style.display === "none" || pComentario.style.display === "") {
                     pComentario.style.display = "block";
@@ -353,23 +353,23 @@ function carregarTabela() {
                 }
             });
 
-            // === Editar/Salvar/Cancelar ===
+            // === Editar/Salvar/Cancelar === \\
             btnEditar.addEventListener("click", () => {
-                // salva valores originais e estado de exibição
+                // salva valores originais e estado de exibição \\
                 linha.dataset.original = JSON.stringify({
                     preferido: inputs[0].value,
                     datahora: inputs[1].value,
                     comentario: taComentario.value,
                     nota: inputs[3].value,
-                    visivel: pComentario.style.display === "block" // salva estado
+                    visivel: pComentario.style.display === "block" // salva estado \\
                 });
 
                 pComentario.style.display = "none";
                 taComentario.style.display = "block";
                 taComentario.disabled = false;
 
-                // Oculta botão Mostrar/Esconder enquanto edita
-                btnToggle.style.display = "none";
+                // Oculta botão Mostrar/Esconder enquanto edita \\
+                btnToggle.style.display = "none"; 
 
                 inputs.forEach((i) => (i.disabled = false));
                 btnEditar.style.display = "none";
@@ -393,11 +393,11 @@ function carregarTabela() {
                 taComentario.disabled = true;
                 taComentario.style.display = "none";
 
-                // 🔥 restaura estado anterior (mostrado ou escondido)
+                // 🔥 restaura estado anterior (mostrado ou escondido) \\
                 pComentario.style.display = estavaVisivel ? "block" : "none";
                 btnToggle.textContent = estavaVisivel ? "Esconder Comentário" : "Mostrar Comentário";
 
-                // Mostra novamente o botão Mostrar/Esconder
+                // Mostra novamente o botão Mostrar/Esconder \\
                 btnToggle.style.display = "inline-block";
 
                 inputs.forEach((i) => (i.disabled = true));
@@ -426,19 +426,45 @@ function carregarTabela() {
                 taComentario.disabled = true;
                 taComentario.style.display = "none";
 
-                // 🔥 restaura também o estado anterior (mostrado/escondido)
+                // 🔥 restaura também o estado anterior (mostrado/escondido) \\
                 const estavaVisivel = original.visivel || false;
                 pComentario.style.display = estavaVisivel ? "block" : "none";
                 btnToggle.textContent = estavaVisivel ? "Esconder Comentário" : "Mostrar Comentário";
 
-                // Mostra novamente o botão Mostrar/Esconder
-                btnToggle.style.display = "inline-block";
+                // Mostra novamente o botão Mostrar/Esconder \\
+                btnToggle.style.display = "inline-block"; 
 
                 inputs.forEach((i) => (i.disabled = true));
 
                 btnSalvar.style.display = "none";
                 btnCancelar.style.display = "none";
                 btnEditar.style.display = "inline-block";
+            });
+
+            const btnApagar = document.createElement("button");
+            btnApagar.textContent = "🗑️ Apagar";
+            btnApagar.classList.add("botao-apagar");
+            btnEditar.insertAdjacentElement("afterend", btnApagar);
+
+            btnApagar.addEventListener("click", () => {
+                const confirmar = confirm("❗ Tem certeza que deseja apagar esta avaliação?");
+                if (!confirmar) return;
+
+                // Remove o item do array e atualiza localStorage \\
+                const indice = dadosSalvos.indexOf(item);
+                if (indice !== -1) {
+                    dadosSalvos.splice(indice, 1);
+                    localStorage.setItem(chaveUsuario, JSON.stringify(dadosSalvos));
+                    linha.remove();
+                    alert("🗑️ Avaliação removida com sucesso!");
+                }
+
+                // 🔁 Se não restar mais nenhum item, mostra mensagem de lista vazia \\
+                if (dadosSalvos.length === 0) {
+                    const msg = document.createElement("tr");
+                    msg.innerHTML = `<td colspan="5">📭 Nenhuma série cadastrada ainda.</td>`;
+                    tbody.appendChild(msg);
+                }
             });
         });
     } else {
@@ -482,8 +508,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const secCadastro = document.getElementById("cadastroSection");
     const btnMostrarCadastro = document.getElementById("mostrarCadastro");
     const btnMostrarLogin = document.getElementById("mostrarLogin");
-
-    // Alternar entre login e cadastro
+ 
+    // Alternar entre login e cadastro \\
     if (btnMostrarCadastro && btnMostrarLogin) {
         btnMostrarCadastro.addEventListener("click", (e) => {
             e.preventDefault();
@@ -498,7 +524,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // Cadastro de novo usuário
+    // Cadastro de novo usuário \\
     if (formCadastro) {
         formCadastro.addEventListener("submit", (e) => {
             e.preventDefault();
@@ -525,13 +551,13 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("✅ Cadastro realizado com sucesso!");
             formCadastro.reset();
 
-            // Voltar para login
+            // Voltar para login \\
             secCadastro.style.display = "none";
             secLogin.style.display = "block";
         });
     }
 
-    // Login
+    // Login \\
     if (formLogin) {
         formLogin.addEventListener("submit", (e) => {
             e.preventDefault();
